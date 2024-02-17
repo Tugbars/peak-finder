@@ -1,4 +1,6 @@
-Project Title: Peak Finding Algorithm Snippet
+# Peak Finding Algorithm Snippet
+
+
 Description:
 This repository contains a stripped-down version of a peak finding algorithm initially developed as part of a larger embedded systems project. The code demonstrates my ability to write efficient algorithms and manage data processing tasks within constrained environments. Although the code is isolated from its original context and lacks the complete functionality and integrations of the full system, it serves as a showcase of algorithm development skills, particularly in identifying peaks within a dataset, calculating their prominences, and organizing these values in a vector for further analysis.
 
