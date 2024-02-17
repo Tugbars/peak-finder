@@ -46,6 +46,12 @@ peak comparator(std::vector<peak> minmag, int extrema)
 	return minmag[index];
 }
 
+/**
+ * @brief Calculates the difference between consecutive elements in a vector.
+ * 
+ * @param in Input vector of floats.
+ * @param out Output vector containing the difference between consecutive elements of `in`.
+ */
 void diff(std::vector<float> in, std::vector<float>& out)
 {
 	out = std::vector<float>(in.size() - 1);
@@ -53,6 +59,13 @@ void diff(std::vector<float> in, std::vector<float>& out)
 		out[i - 1] = in[i] - in[i - 1];
 }
 
+/**
+ * @brief Calculates the element-wise product of two vectors.
+ * 
+ * @param a First input vector of floats.
+ * @param b Second input vector of floats.
+ * @param out Output vector containing the element-wise product of `a` and `b`.
+ */
 void vectorElementsProduct(std::vector<float> a, std::vector<float> b, std::vector<float>& out)
 {
 	out = std::vector<float>(a.size());
@@ -61,6 +74,13 @@ void vectorElementsProduct(std::vector<float> a, std::vector<float> b, std::vect
 		out[i] = a[i] * b[i];
 }
 
+/**
+ * @brief Finds indices of vector elements greater than a specified threshold.
+ * 
+ * @param in Input vector of floats.
+ * @param threshold Float threshold for comparison.
+ * @param indices Output vector of indices where `in[i]` is greater than `threshold`.
+ */
 void findIndicesMoreThan(std::vector<float> in, float threshold, std::vector<int>& indices)
 {
 	for (int i = 0; i < in.size(); ++i)
@@ -68,6 +88,13 @@ void findIndicesMoreThan(std::vector<float> in, float threshold, std::vector<int
 			indices.push_back(i + 1);
 }
 
+/**
+ * @brief Finds indices of vector elements less than a specified threshold.
+ * 
+ * @param in Input vector of floats.
+ * @param threshold Float threshold for comparison.
+ * @param indices Output vector of indices where `in[i]` is less than `threshold`.
+ */
 void findIndicesLessThan(std::vector<float> in, float threshold, std::vector<int>& indices)
 {
 	for (int i = 0; i < in.size(); ++i)
@@ -75,19 +102,38 @@ void findIndicesLessThan(std::vector<float> in, float threshold, std::vector<int
 			indices.push_back(i + 1);
 }
 
-// as much as the indices size, second argument size.
+/**
+ * @brief Selects elements from an input vector based on specified indices.
+ * 
+ * @param in Input vector from which to select elements.
+ * @param indices Vector of indices of elements to select from `in`.
+ * @param out Output vector containing selected elements.
+ */
 void selectElementsFromIndices(std::vector<float> in, std::vector<int> indices, std::vector<float>& out)
 {
 	for (int i = 0; i < indices.size(); ++i)
 		out.push_back(in[indices[i]]);
 }
 
+/**
+ * @brief Selects elements from an input vector of integers based on specified indices.
+ * 
+ * @param in Input vector of integers from which to select elements.
+ * @param indices Vector of indices of elements to select from `in`.
+ * @param out Output vector of integers containing selected elements.
+ */
 void selectElementsFromIndices(std::vector<int> in, std::vector<int> indices, std::vector<int>& out)
 {
 	for (int i = 0; i < indices.size(); ++i)
 		out.push_back(in[indices[i]]);
 }
 
+/**
+ * @brief Assigns a sign to each element of the input vector: 1 for positive, -1 for negative, and 0 for zero values.
+ * 
+ * @param in Input vector of floats.
+ * @param out Output vector of integers with signs corresponding to elements of `in`.
+ */
 void signVector(std::vector<float> in, std::vector<int>& out)
 {
 	out = std::vector<int>(in.size());
@@ -103,6 +149,13 @@ void signVector(std::vector<float> in, std::vector<int>& out)
 	}
 }
 
+/**
+ * @brief Multiplies each element of the input vector by a scalar value.
+ * 
+ * @param scalar Scalar value to multiply with each element of `in`.
+ * @param in Input vector of floats.
+ * @param out Output vector of floats, each element of `in` multiplied by `scalar`.
+ */
 void scalarProduct(float scalar, std::vector<float> in, std::vector<float>& out)
 {
 	out = std::vector<float>(in.size());
@@ -111,6 +164,13 @@ void scalarProduct(float scalar, std::vector<float> in, std::vector<float>& out)
 		out[i] = scalar * in[i];
 }
 
+/**
+ * @brief Finds the previous bin with a magnitude greater than or equal to the current bin's magnitude.
+ * 
+ * @param bins Input vector of bin magnitudes.
+ * @param index Index of the current bin.
+ * @return Index of the previous bin with magnitude >= current bin's magnitude, or 0 if not found.
+ */
 int find_prev_bin_with_magnitude(std::vector<float> bins, int index)
 {
 	float magnitude = bins[index];
@@ -125,6 +185,14 @@ int find_prev_bin_with_magnitude(std::vector<float> bins, int index)
 	return 0; // couldn't find
 }
 
+/**
+ * @brief Finds the next bin with a magnitude greater than or equal to the current bin's magnitude.
+ * 
+ * @param bins Input vector of bin magnitudes.
+ * @param index Index of the current bin.
+ * @param num_bins Total number of bins.
+ * @return Index of the next bin with magnitude >= current bin's magnitude, or last bin index if not found.
+ */
 int find_next_bin_with_magnitude(std::vector<float> bins, int index, int num_bins)
 {
 	float magnitude = bins[index];
@@ -138,7 +206,14 @@ int find_next_bin_with_magnitude(std::vector<float> bins, int index, int num_bin
 	return num_bins - 1; // couldn't find
 }
 
-// find the baseline.
+/**
+ * @brief Finds the minimum magnitude within a specified range of bins.
+ * 
+ * @param bins Input vector of bin magnitudes.
+ * @param index_left Starting index of the range.
+ * @param index_right Ending index of the range.
+ * @return Minimum magnitude within the specified range.
+ */
 float get_min_magnitude_in_range(std::vector<float> bins, int index_left, int index_right)
 {
 	float min_magnitude = 1e6;
@@ -152,6 +227,14 @@ float get_min_magnitude_in_range(std::vector<float> bins, int index_left, int in
 	return min_magnitude;
 }
 
+/**
+ * @brief Calculates the prominence of a peak at a given location.
+ * 
+ * @param x0 Input vector of data.
+ * @param index_holder Vector of peak indices.
+ * @param tempLoc Index of the current peak whose prominence is to be calculated.
+ * @return The prominence of the peak at `tempLoc`.
+ */
 float prominenceCalc(std::vector<float> x0, std::vector<int> index_holder, int tempLoc)
 {
 	// read MATLAB's prominence algorithm explanation to learn more about the calculations below
@@ -167,30 +250,53 @@ float prominenceCalc(std::vector<float> x0, std::vector<int> index_holder, int t
 	return prominence;
 }
 
+
+/**
+ * @brief Change of Slope Detection Method for Peak Identification
+ *
+ * This function implements a heuristic method for detecting peaks in a dataset by calculating the product of 
+ * consecutive differences (first derivatives) and identifying locations where this product is negative. This 
+ * approach is akin to finding points of inflection where the slope of the function changes sign, without directly 
+ * computing the second derivative but leveraging a concept related to it.
+ * 
+ * In the context of digital signal processing (DSP) and numerical analysis, this method is seen as a simplified 
+ * or heuristic approach for peak detection. It is particularly effective when the goal is to detect changes in the 
+ * trend of the data rather than identifying exact inflection points through the zero points of the second derivative, 
+ * which is a common approach for continuous functions.
+ * 
+ * The method identifies potential peaks by exploiting the fact that at a peak (either a maximum or a minimum), the 
+ * direction of the slope changes. By calculating the product of consecutive slopes (differences), a negative result 
+ * indicates a directional change, characteristic of a peak. This computational approach is simpler than a true second 
+ * derivative test, making it advantageous in discrete datasets where direct derivative calculations are more 
+ * challenging and susceptible to noise.
+ * 
+ * This technique, described as a change of slope detection method, balances computational efficiency with the need 
+ * for identifying significant changes in the data's trend. It is particularly suitable for embedded systems, where 
+ * limited resources necessitate efficient algorithms.
+ *
+ * @param dataVec A std::vector<float> containing the dataset to analyze.
+ * @return std::vector<int> containing the indices of detected peaks, based on the change of slope detection method.
+ */
 struct peak OldfindPeaks(std::vector<float> x0, bool includeEndpoints, float extrema)
 {
 	float selectivity = 0.0f;
 	int vector_length = x0.size();
 
-		//--SECOND ORDER DERIVATIVE TEST--
-	scalarProduct(extrema, x0, x0); // is also called as dot product.
+	scalarProduct(extrema, x0, x0); // maxima or minima? extrema determines that. 
 
 	std::vector<float> derivative;
 	// compare scalar products of each item to the one before and put it inside dx vector
 	diff(x0, derivative);
 	// clears machine epsilons.
 	std::replace(derivative.begin(), derivative.end(), 0.0f, EPS); // not usable for now.
-	// initialize vectors to find second derivatives
 	std::vector<float> derivative0(derivative.begin(), derivative.end() - 1); // from 0 to n-1 vector
 	std::vector<float> derivative1(derivative.begin() + 1, derivative.end()); // from 1 to n vector
 	std::vector<float> second_derivative;
 
-	vectorElementsProduct(derivative0, derivative1, second_derivative);
+	vectorElementsProduct(derivative0, derivative1, second_derivative); //multiply instead of following 
 	std::vector<int> index_holder;
 	// Find where the derivative changes sign
 	findIndicesLessThan(second_derivative, 0, index_holder); // 0 is for threshold.
-
-	//--SECOND ORDER DERIVATIVE TEST--
 
 	//*************************************************************************************************************************************************
 	// FIND THE MAXIMA
